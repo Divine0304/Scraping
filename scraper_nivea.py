@@ -45,6 +45,16 @@ with open("nivea_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
                 nom = p.find_element(By.CSS_SELECTOR, "h2 span").text
 
                 print(nom)
+                try:
+                    entier = p.find_element(By.CSS_SELECTOR, ".a-price-whole").text
+                    centimes = p.find_element(By.CSS_SELECTOR, ".a-price-fraction").text
+
+                    prix = f"{entier},{centimes}€"
+
+                except:
+                    prix = "N/A"
+
+                print(prix)
 
             except:
                 continue
