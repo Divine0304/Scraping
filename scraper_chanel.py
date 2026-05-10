@@ -4,11 +4,11 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
-# -----------------------------
-# CONFIGURATION
-# -----------------------------
 
-# Modification de la requête pour Chanel
+# CONFIGURATION
+
+
+
 BASE_URL = "https://www.amazon.fr/s?k=chanel+beaute&page={}"
 NB_PAGES = 3
 
@@ -26,7 +26,7 @@ driver = webdriver.Chrome(options=options)
 # CRÉATION CSV
 # -----------------------------
 
-# Le fichier s'appellera désormais chanel_amazon.csv
+
 with open("chanel_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
 
     writer = csv.writer(fichier)
