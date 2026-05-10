@@ -44,3 +44,34 @@ with open("guerlain_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
         )
 
         print(f"Produits trouvés : {len(produits)}")
+        for p in produits:
+
+            try:
+
+                nom = p.find_element(By.CSS_SELECTOR, "h2 span").text
+
+                print(nom)
+                try:
+
+                    entier = p.find_element(
+                        By.CSS_SELECTOR,
+                        ".a-price-whole"
+                    ).text
+
+                    centimes = p.find_element(
+                        By.CSS_SELECTOR,
+                        ".a-price-fraction"
+                    ).text
+
+                    prix = f"{entier},{centimes}€"
+
+                except:
+                    prix = "N/A"
+
+                print(prix)
+                categorie = "Cosmétique et Beauté"
+
+                print(categorie)
+
+            except:
+                continue
