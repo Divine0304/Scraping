@@ -9,6 +9,9 @@ options = Options()
 
 options.add_argument("--start-maximized")
 options.add_argument("--disable-blink-features=AutomationControlled")
+options.add_argument(
+    "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0 Safari/537.36"
+)
 
 driver = webdriver.Chrome(options=options)
 with open("nivea_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
@@ -55,6 +58,22 @@ with open("nivea_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
                     prix = "N/A"
 
                 print(prix)
+                categorie = "Cosmétique et Beauté"
+
+                print(categorie)
+                try:
+
+                    note_brute = p.find_element(
+                        By.CSS_SELECTOR,
+                        ".a-icon-alt"
+                    ).get_attribute("innerHTML")
+
+                    note = note_brute.split(" ")[0]
+
+                except:
+                    note = "N/A"
+
+                print(note)
 
             except:
                 continue
