@@ -74,6 +74,12 @@ with open("nivea_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
                     note = "N/A"
 
                 print(note)
+                writer.writerow([
+                    nom,
+                    prix,
+                    categorie,
+                    note
+                ])
 
             except:
                 continue
