@@ -17,3 +17,13 @@ options.add_argument(
 )
 
 driver = webdriver.Chrome(options=options)
+with open("guerlain_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
+
+    writer = csv.writer(fichier)
+
+    writer.writerow([
+        "nom_produit",
+        "prix",
+        "categorie",
+        "note"
+    ])
