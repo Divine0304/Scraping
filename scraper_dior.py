@@ -33,3 +33,22 @@ with open("dior_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
         "categorie",
         "note"
     ])
+     # -----------------------------
+    # BOUCLE PAGES
+    # -----------------------------
+
+    for page in range(1, NB_PAGES + 1):
+
+        url = BASE_URL.format(page)
+
+        print(f"Scraping Dior - Page {page}...")
+
+        driver.get(url)
+
+        time.sleep(5)
+
+        # Tous les produits Amazon
+        produits = driver.find_elements(
+            By.CSS_SELECTOR,
+            "div.s-result-item[data-component-type='s-search-result']"
+        )
