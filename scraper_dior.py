@@ -13,3 +13,12 @@ NB_PAGES = 3
 # -----------------------------
 # SELENIUM
 # -----------------------------
+options = Options()
+options.add_argument("--start-maximized")
+options.add_argument("--disable-blink-features=AutomationControlled")
+
+driver = webdriver.Chrome(options=options)
+
+# -----------------------------
+# CRÉATION CSV
+# -----------------------------
