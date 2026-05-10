@@ -21,3 +21,30 @@ with open("nivea_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
         "categorie",
         "note"
     ])
+    for page in range(1, NB_PAGES + 1):
+
+        url = BASE_URL.format(page)
+
+        print(f"Scraping page {page}...")
+
+        driver.get(url)
+
+        time.sleep(5)
+
+        print(driver.title)
+        produits = driver.find_elements(
+            By.CSS_SELECTOR,
+            "div.s-result-item[data-component-type='s-search-result']"
+        )
+
+        print(f"Produits trouvés : {len(produits)}")
+        for p in produits:
+
+            try:
+
+                nom = p.find_element(By.CSS_SELECTOR, "h2 span").text
+
+                print(nom)
+
+            except:
+                continue
