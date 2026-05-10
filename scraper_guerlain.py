@@ -72,6 +72,25 @@ with open("guerlain_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
                 categorie = "Cosmétique et Beauté"
 
                 print(categorie)
+                try:
+
+                    note_brute = p.find_element(
+                        By.CSS_SELECTOR,
+                        ".a-icon-alt"
+                    ).get_attribute("innerHTML")
+
+                    note = note_brute.split(" ")[0]
+
+                except:
+                    note = "N/A"
+
+                print(note)
+                writer.writerow([
+                    nom,
+                    prix,
+                    categorie,
+                    note
+                ])
 
             except:
                 continue
