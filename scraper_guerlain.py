@@ -38,3 +38,9 @@ with open("guerlain_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
         time.sleep(5)
 
         print(driver.title)
+        produits = driver.find_elements(
+            By.CSS_SELECTOR,
+            "div.s-result-item[data-component-type='s-search-result']"
+        )
+
+        print(f"Produits trouvés : {len(produits)}")
