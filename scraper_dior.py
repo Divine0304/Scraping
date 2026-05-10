@@ -52,3 +52,63 @@ with open("dior_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
             By.CSS_SELECTOR,
             "div.s-result-item[data-component-type='s-search-result']"
         )
+           # -----------------------------
+        # BOUCLE PRODUITS
+        # -----------------------------
+
+        for p in produits:
+
+            try:
+
+                # NOM PRODUIT
+                try:
+                    nom = p.find_element(By.CSS_SELECTOR, "h2 span").text
+                except:
+                    nom = "N/A"
+
+                # PRIX
+                try:
+                    entier = p.find_element(By.CSS_SELECTOR, ".a-price-whole").text
+                    centimes = p.find_element(By.CSS_SELECTOR, ".a-price-fraction").text
+
+                    prix = f"{entier},{centimes}€"
+
+                except:
+                    prix = "N/A"
+
+                # CATÉGORIE
+                categorie = "Cosmétique et Beauté"
+
+                # NOTE
+                try:
+                    note_brute = p.find_element(
+                        By.CSS_SELECTOR,
+                        ".a-icon-alt"
+                    ).get_attribute("innerHTML")
+
+                    note = note_brute.split(" ")[0]
+
+                except:
+                    note = "N/A"
+
+                # ÉCRITURE CSV
+                writer.writerow([
+                    nom,
+                    prix,
+                    categorie,
+                    note
+                ])
+
+            except:
+                continue
+
+        time.sleep(2)
+
+# -----------------------------
+# FIN
+# -----------------------------
+
+driver.quit()
+
+print("Scraping terminé !")
+print("Fichier créé : dior_amazon.csv")
