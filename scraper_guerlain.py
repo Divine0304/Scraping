@@ -94,3 +94,6 @@ with open("guerlain_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
 
             except:
                 continue
+driver.quit()
+
+print("Scraping terminé !")
