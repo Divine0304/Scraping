@@ -22,3 +22,14 @@ driver = webdriver.Chrome(options=options)
 # -----------------------------
 # CRÉATION CSV
 # -----------------------------
+with open("dior_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
+
+    writer = csv.writer(fichier)
+
+    # Colonnes CSV
+    writer.writerow([
+        "nom_produit",
+        "prix",
+        "categorie",
+        "note"
+    ])
