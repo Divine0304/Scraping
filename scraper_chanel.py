@@ -5,16 +5,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
 
-# CONFIGURATION
+
 
 
 
 BASE_URL = "https://www.amazon.fr/s?k=chanel+beaute&page={}"
 NB_PAGES = 3
 
-# -----------------------------
-# SELENIUM
-# -----------------------------
+
 
 options = Options()
 options.add_argument("--start-maximized")
@@ -22,9 +20,7 @@ options.add_argument("--disable-blink-features=AutomationControlled")
 
 driver = webdriver.Chrome(options=options)
 
-# -----------------------------
-# CRÉATION CSV
-# -----------------------------
+
 
 
 with open("chanel_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
@@ -39,9 +35,7 @@ with open("chanel_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
         "note"
     ])
 
-    # -----------------------------
-    # BOUCLE PAGES
-    # -----------------------------
+
 
     for page in range(1, NB_PAGES + 1):
 
@@ -53,21 +47,19 @@ with open("chanel_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
 
         time.sleep(5)
 
-        # Tous les produits Amazon
+
         produits = driver.find_elements(
             By.CSS_SELECTOR,
             "div.s-result-item[data-component-type='s-search-result']"
         )
 
-        # -----------------------------
-        # BOUCLE PRODUITS
-        # -----------------------------
+
 
         for p in produits:
 
             try:
 
-                # NOM PRODUIT
+
                 try:
                     nom = p.find_element(By.CSS_SELECTOR, "h2 span").text
                 except:
@@ -83,7 +75,7 @@ with open("chanel_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
                 except:
                     prix = "N/A"
 
-                # CATÉGORIE
+
                 categorie = "Luxe et Beauté"
 
                 # NOTE
@@ -98,7 +90,7 @@ with open("chanel_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
                 except:
                     note = "N/A"
 
-                # ÉCRITURE CSV
+
                 writer.writerow([
                     nom,
                     prix,
@@ -111,9 +103,7 @@ with open("chanel_amazon.csv", "w", newline="", encoding="utf-8") as fichier:
 
         time.sleep(2)
 
-# -----------------------------
-# FIN
-# -----------------------------
+
 
 driver.quit()
 
